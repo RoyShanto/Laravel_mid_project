@@ -41,6 +41,6 @@
 
         </fieldset>
     </form>
-    {{session('msg')}}
+    <span style="color: red;">{{session('msg')}}</span>
 </body>
 </html>

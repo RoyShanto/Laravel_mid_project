@@ -54,3 +54,6 @@ Route::post('/wish', [ProductController::class, 'wish']);
 Route::get('/show_wish', [ProductController::class, 'show_wish']);
 
 
+Route::post('/search_product', [ProductController::class, 'search_product']);
+
+

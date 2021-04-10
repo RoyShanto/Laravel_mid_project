@@ -260,7 +260,35 @@ class ProductController extends Controller
         $product = Order::where('buyer_username', $username)
         ->where('wish', "wish")
         ->get();
-// print_r($product);
         return view('Buyer.show_order', ['product' => $product]);
     }
+
+    public function search_product(Request $req){
+        // $product = Product::all();
+        // foreach($product as $p){
+        //     if($p->p_name == $req->search_product){
+        //         // return view('Buyer.index', ['users' => $product]);
+        //         echo "p";
+        //     }
+        //     else{
+        //         echo "f";
+        //     }
+        // }
+
+
+        $product = Product::where("p_name", $req->search_product)->get();
+        foreach($product as $p){
+            if($p->p_name == $req->search_product){
+                return view('Buyer.index', ['users' => $product]);
+            }
+            else{
+                echo "p";
+            }
+        }
+        $req->session()->flash('msg', 'Data Not Found..!');
+        $product = Product::all();
+        return view('buyer.index', ['users' => $product]);
+    }
+
+
 }

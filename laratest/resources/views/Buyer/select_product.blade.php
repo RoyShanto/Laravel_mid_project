@@ -15,7 +15,7 @@
             <a href="/show_cart">Add To Cart</a>&nbsp;&nbsp;&nbsp;
             <a href="/show_wish">Wish List</a>&nbsp;&nbsp;&nbsp;
             <a href="/order_history">Order History</a>&nbsp;&nbsp;&nbsp;
-            <a href="/logout">Logout</a>
+            <a href="/logout">Logout</a><br><br>
             <input type="submit" value="&#10084;" formaction="{{url('/wish')}}"><br>
             @foreach($users as $user)
                 <span style="font-size:20px;">

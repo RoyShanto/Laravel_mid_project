@@ -8,15 +8,23 @@
     </head>
     <body>
     <!-- {{ session('username')}} -->
-        <!-- <form action="", method="POST"> -->
+
         <h1>Welcome To Our Website..!</h1>
 <a href="/abc.com">Home</a> &nbsp;&nbsp;&nbsp;
 <a href="/profile/{{session('username')}}">Edit Profile</a> &nbsp;&nbsp;&nbsp;
 <a href="/show_cart">Add To Cart</a>&nbsp;&nbsp;&nbsp;
 <a href="/show_wish">Wish List</a>&nbsp;&nbsp;&nbsp;
 <a href="/order_history">Order History</a>&nbsp;&nbsp;&nbsp;
-<a href="/logout">Logout</a>
-            <br><br>
+<a href="/logout/name">Logout</a>
+<br><br>
+<form action="", method="POST">
+@csrf
+<input type="text" name="search_product">
+<input type="submit" value="search" formaction="{{url('/search_product')}}">
+<span style="color: red;">{{session('msg')}}</span>
+</form>
+
+
 
             @foreach($users as $user)
                 <div style="border:1px solid; width:200px; height:300px; margin-left:10px; margin-right:10px; margin-top:10px; border-radius: 5px; text-align: center; padding:5px; float:left;">
@@ -31,7 +39,7 @@
                 </div>
             @endforeach
 
-        <!-- </form> -->
+
 
     </body>
 </html>
