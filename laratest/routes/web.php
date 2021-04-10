@@ -53,7 +53,26 @@ Route::get('/order_history', [ProductController::class, 'order_history']);
 Route::post('/wish', [ProductController::class, 'wish']);
 Route::get('/show_wish', [ProductController::class, 'show_wish']);
 
-
 Route::post('/search_product', [ProductController::class, 'search_product']);
+
+
+Route::get('/report_seller/{id}', [UserController::class, 'report_seller']);
+Route::post('/report_seller/{id}', [UserController::class, 'report_seller_submit']);
+
+
+Route::get('/ask_question/{id}', [ProductController::class, 'ask_question']);
+Route::post('/ask_question/{id}', [ProductController::class, 'ask_question_submit']);
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/low_to_price', [ProductController::class, 'low_to_price']); //////////////
 
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Buyer;
 use App\Models\Order;
+use App\Models\Feedback;
 use Illuminate\Support\Facades\DB;
 
 
@@ -290,5 +291,34 @@ class ProductController extends Controller
         return view('buyer.index', ['users' => $product]);
     }
 
+    public function low_to_price(){ ////////////////////////////////
+        // echo "LTP";
+        $product = Product::max('p_price');
+        echo $product;
+    }
 
+    public function ask_question($id){
+        // echo $id;
+        $data = DB::table('user_feedback')
+        ->where('product_id', $id)
+        ->get();
+// print_r($data);
+        return view('Buyer.ask_question', ['data' => $data]);
+        // return view('Buyer.ask_question', ['id' => $id]);
+
+    }
+    public function ask_question_submit(Request $req){
+        $user = new Feedback();          //Buyer is a model name
+        $user->product_id = $req->id;
+        $user->ask_question = $req->question;
+        $user->save();
+
+        $req->session()->flash('msg', 'Report send succesfull');
+
+        $data = DB::table('user_feedback')
+        ->where('product_id', $req->id)
+        ->get();
+
+        return view('Buyer.ask_question', ['data' => $data]);
+    }
 }

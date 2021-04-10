@@ -11,13 +11,16 @@
         <!-- {{$users}} -->
         @csrf
             <h1>A product</h1>
+            <a href="/abc.com">Home</a> &nbsp;&nbsp;&nbsp;
             <a href="/profile/{{session('username')}}">Edit Profile</a> &nbsp;&nbsp;&nbsp;
             <a href="/show_cart">Add To Cart</a>&nbsp;&nbsp;&nbsp;
             <a href="/show_wish">Wish List</a>&nbsp;&nbsp;&nbsp;
             <a href="/order_history">Order History</a>&nbsp;&nbsp;&nbsp;
             <a href="/logout">Logout</a><br><br>
-            <input type="submit" value="&#10084;" formaction="{{url('/wish')}}"><br>
-            @foreach($users as $user)
+@foreach($users as $user)
+            <a href="/report_seller/{{$user->p_id}}">Report Seller</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="&#10084;" formaction="{{url('/wish')}}"><br><br>
+
                 <span style="font-size:20px;">
                     <img src= "{{asset('/upload')}}/{{$user->image}}" width="180px" height="180px" name="file"><br>
 
@@ -56,7 +59,9 @@
 
                     <input type="submit" value="Order Now" formaction="{{url('/order_now')}}">
                     <input type="submit" value="Add to Cart" formaction="{{url('/add_to_cart')}}">
-
+                    <br><br>
+                    <a href="/ask_question/{{$user->p_id}}">Ask Question</a>&nbsp;&nbsp;&nbsp;
+                    <a href="/review">Review</a>
                 </span><br>
             @endforeach
         </form>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use App\Models\Feedback;
 
 use Illuminate\Http\Request;
 
@@ -43,5 +44,23 @@ class UserController extends Controller
         return redirect('/abc.com');
 
         // 2021-04-05 18:45:34
+    }
+    public function report_seller($id){
+        // $user = DB::table('product')->where('p_id', $id)->get();
+        // print_r($user);
+        return view('Buyer.report_seller', ['id' => $id]);
+    }
+    public function report_seller_submit(Request $req){
+        // echo $req->message;
+        // echo $req->id;
+
+
+        $user = new Feedback();          //Buyer is a model name
+        $user->product_id = $req->id;
+        $user->report_message = $req->message;
+        $user->save();
+
+        $req->session()->flash('msg', 'Report send succesfull');
+        return redirect('/abc.com');
     }
 }
