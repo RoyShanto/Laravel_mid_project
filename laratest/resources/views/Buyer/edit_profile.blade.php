@@ -8,11 +8,12 @@
 </head>
 <body>
 <h1>Edit Information Here!</h1>
-    <!-- @if($errors->any())
-        @foreach($errors -> all() as $err)
-        <li>{{$err}}</li>
-        @endforeach
-    @endif -->
+<a href="/abc.com">Home</a> &nbsp;&nbsp;&nbsp;
+<a href="/profile/{{session('username')}}">Edit Profile</a> &nbsp;&nbsp;&nbsp;
+<a href="/show_cart">Add To Cart</a>&nbsp;&nbsp;&nbsp;
+<a href="/show_wish">Wish List</a>&nbsp;&nbsp;&nbsp;
+<a href="/order_history">Order History</a>&nbsp;&nbsp;&nbsp;
+<a href="/logout">Logout</a><br><br
     <form method="post">
 
         @csrf

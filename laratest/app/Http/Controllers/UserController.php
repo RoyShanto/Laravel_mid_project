@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index($username){
-        echo $username;
+        // echo $username;
         // echo date("Y-F-j");
         $user = DB::table('buyers')->where('user_name', $username)->get();
         // print_r($user);
