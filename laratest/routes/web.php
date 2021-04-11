@@ -64,6 +64,16 @@ Route::get('/ask_question/{id}', [ProductController::class, 'ask_question']);
 Route::post('/ask_question/{id}', [ProductController::class, 'ask_question_submit']);
 
 
+Route::get('/review/{id}', [ProductController::class, 'review']);
+Route::post('/review/{id}', [ProductController::class, 'review_submit']);
+
+
+
+
+Route::get('/best_selling_product', [ProductController::class, 'best_selling_product']);
+
+
+
 
 
 

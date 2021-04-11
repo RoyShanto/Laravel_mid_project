@@ -15,7 +15,8 @@
 <a href="/show_cart">Add To Cart</a>&nbsp;&nbsp;&nbsp;
 <a href="/show_wish">Wish List</a>&nbsp;&nbsp;&nbsp;
 <a href="/order_history">Order History</a>&nbsp;&nbsp;&nbsp;
-<a href="/logout/name">Logout</a>
+<a href="/best_selling_product">Best Selling Product</a>&nbsp;&nbsp;&nbsp;
+<a href="/logout">Logout</a>
 <br><br>
 <form action="", method="POST">
 @csrf

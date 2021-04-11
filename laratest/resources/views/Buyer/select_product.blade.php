@@ -61,7 +61,7 @@
                     <input type="submit" value="Add to Cart" formaction="{{url('/add_to_cart')}}">
                     <br><br>
                     <a href="/ask_question/{{$user->p_id}}">Ask Question</a>&nbsp;&nbsp;&nbsp;
-                    <a href="/review">Review</a>
+                    <a href="/review/{{$user->p_id}}">Review</a>
                 </span><br>
             @endforeach
         </form>

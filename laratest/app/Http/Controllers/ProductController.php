@@ -81,6 +81,7 @@ class ProductController extends Controller
                 $user->buyer_id = $u['id'];
                 $user->image = $req->p_image;
                 $user->description = $req->p_description;
+                $user->p_id = $req->p_id;
                 $user->save();
 
                 echo "<h1>  Order Successfully Done  </h1>";
@@ -125,6 +126,7 @@ class ProductController extends Controller
 
             $user->image = $req->p_image;
             $user->description = $req->p_description;
+            $user->p_id = $req->p_id;
             $user->save();
 
             echo "<h1>  Order Successfully Done  </h1>";
@@ -163,6 +165,7 @@ class ProductController extends Controller
 
             $user->image = $req->p_image;
             $user->description = $req->p_description;
+            $user->p_id = $req->p_id;
             $user->save();
 
             echo "<h1>  Add_To_Cart Successfully Done  </h1>";
@@ -242,6 +245,7 @@ class ProductController extends Controller
 
             $user->image = $req->p_image;
             $user->description = $req->p_description;
+            $user->p_id = $req->p_id;
             $user->save();
 
             // echo "<h1>  Wish Successfully Done  </h1>";
@@ -297,8 +301,8 @@ class ProductController extends Controller
         echo $product;
     }
 
-    public function ask_question($id){
-        // echo $id;
+
+    public function ask_question($id){  //product id
         $data = DB::table('user_feedback')
         ->where('product_id', $id)
         ->get();
@@ -320,5 +324,55 @@ class ProductController extends Controller
         ->get();
 
         return view('Buyer.ask_question', ['data' => $data]);
+    }
+
+
+
+
+    public function review($id, Request $req){
+        $username = $req->session()->get('username');
+        $product = DB::table('orders')
+        ->where('status', "Orderd")
+        ->where('buyer_username', $username)
+        ->where('p_id', $id)
+        ->get();
+        foreach($product as $p){
+            if($p->status == "Orderd"){
+                $data = DB::table('user_feedback')
+                ->where('product_id', $id)
+                ->get();
+                return view('Buyer.review_product', ['data' => $data]);
+            }
+            else{
+                echo "f";
+            }
+        }
+    }
+
+    public function review_submit(Request $req){
+        $user = new Feedback();          //Buyer is a model name
+        $user->product_id = $req->id;
+        $user->review = $req->review;
+        $user->save();
+
+        $req->session()->flash('msg', 'Review send succesfull');
+
+        $data = DB::table('user_feedback')
+        ->where('product_id', $req->id)
+        ->get();
+
+        return view('Buyer.review_product', ['data' => $data]);
+    }
+
+    public function best_selling_product(){
+        // $users = Order::count('p_name');
+        // echo $users;
+
+
+
+        $users = Order::where('p_name', "car")
+        ->count('p_name');
+        echo $users;
+        // return view('buyer.index', ['users' => $users]);
     }
 }
