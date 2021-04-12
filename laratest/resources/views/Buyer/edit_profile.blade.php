@@ -9,11 +9,11 @@
 <body>
 <h1>Edit Information Here!</h1>
 <a href="/abc.com">Home</a> &nbsp;&nbsp;&nbsp;
-<a href="/profile/{{session('username')}}">Edit Profile</a> &nbsp;&nbsp;&nbsp;
+<a href="/profile/{{session('username')}}">My Profile</a> &nbsp;&nbsp;&nbsp;
 <a href="/show_cart">Add To Cart</a>&nbsp;&nbsp;&nbsp;
 <a href="/show_wish">Wish List</a>&nbsp;&nbsp;&nbsp;
 <a href="/order_history">Order History</a>&nbsp;&nbsp;&nbsp;
-<a href="/logout">Logout</a><br><br
+<a href="/logout">Logout</a><br><br>
     <form method="post">
 
         @csrf
@@ -23,20 +23,20 @@
 @foreach($user as $us)
             <table>
 
-            <tr>
-                <td>Full Name:</td>
-                <td>
-                    <input type="text" name="name" value="{{$us->full_name}}"><br>
-                    <span style="color: red;">@error('name'){{$message}}@enderror</span>
-                </td>
-            </tr>
-            <tr>
-                <td>Username:</td>
-                <td>
-                    <input type="text" name="username" value="{{$us->user_name}}"><br>
-                    <span style="color: red;">@error('username'){{$message}}@enderror</span>
-                </td>
-            </tr>
+                <tr>
+                    <td>Full Name:</td>
+                    <td>
+                        <input type="text" name="name" value="{{$us->full_name}}"><br>
+                        <span style="color: red;">@error('name'){{$message}}@enderror</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Username:</td>
+                    <td>
+                        <input type="text" name="username" value="{{$us->user_name}}"><br>
+                        <span style="color: red;">@error('username'){{$message}}@enderror</span>
+                    </td>
+                </tr>
 
                 <tr>
                     <td>Email:</td>

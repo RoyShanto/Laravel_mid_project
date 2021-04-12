@@ -35,7 +35,21 @@ route::get('/registration', [RegistrationController::class, 'index']);
 route::post('/registration', [RegistrationController::class, 'store_user']);
 
 route::get('/profile/{username}', [UserController::class, 'index']);
-route::post('/profile/{username}', [UserController::class, 'update_info']);
+
+route::get('/edit_profile/{username}', [UserController::class, 'profile']);
+route::post('/edit_profile/{username}', [UserController::class, 'update_info']);
+
+
+
+
+
+
+
+
+
+
+route::get('/premium_membership', [UserController::class, 'premium_membership']);
+route::get('/confirm_premium_membership', [UserController::class, 'confirm_premium_membership']);
 
 route::get('/add_product', [ProductController::class, 'add_product']);
 route::post('/add_product', [ProductController::class, 'added_product']);
@@ -70,20 +84,11 @@ Route::post('/review/{id}', [ProductController::class, 'review_submit']);
 
 
 
-Route::get('/best_selling_product', [ProductController::class, 'best_selling_product']);
+Route::get('/best_selling_product', [ProductController::class, 'best_selling_product']); /////////////
 
 
 
-
-
-
-
-
-
-
-
-
-Route::get('/low_to_high_price', [ProductController::class, 'low_to_high_price']); //////////////
-Route::get('/high_to_low_price', [ProductController::class, 'high_to_low_price']); //////////////
+Route::get('/low_to_high_price', [ProductController::class, 'low_to_high_price']);
+Route::get('/high_to_low_price', [ProductController::class, 'high_to_low_price']);
 
 

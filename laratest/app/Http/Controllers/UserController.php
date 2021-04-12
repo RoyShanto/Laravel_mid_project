@@ -13,6 +13,13 @@ class UserController extends Controller
         // echo date("Y-F-j");
         $user = DB::table('buyers')->where('user_name', $username)->get();
         // print_r($user);
+        return view('Buyer.profile', ['user' => $user]);
+    }
+
+    public function profile($username){
+        // echo $username;
+        // echo date("Y-F-j");
+        $user = DB::table('buyers')->where('user_name', $username)->get();
         return view('Buyer.edit_profile', ['user' => $user]);
     }
 
@@ -43,8 +50,36 @@ class UserController extends Controller
 
         return redirect('/abc.com');
 
-        // 2021-04-05 18:45:34
     }
+    public function premium_membership(Request $req){
+        $username = $req->session()->get('username');
+        // echo $username;
+        $user = DB::table('buyers')->where('user_name', $username)->get();
+        // echo $user;
+        foreach($user as $u){
+            echo $u->membership;
+            if($u->membership == 'Premium'){
+                echo "user already get Premium Membership";
+            }
+            else{
+                return view('Buyer.premium_membership', ['user' => $user]);
+            }
+        }
+
+    }
+    public function confirm_premium_membership(Request $req){
+        $username = $req->session()->get('username');
+        $user = DB::table('buyers')
+        ->where('user_name', $username)
+        ->update([
+            'membership' => "premium"
+            ]);
+        $req->session()->flash('msg', 'Premium Membership is done');
+        return redirect('/abc.com');
+    }
+
+
+
     public function report_seller($id){
         // $user = DB::table('product')->where('p_id', $id)->get();
         // print_r($user);
