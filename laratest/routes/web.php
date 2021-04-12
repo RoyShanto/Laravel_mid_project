@@ -83,6 +83,7 @@ Route::get('/best_selling_product', [ProductController::class, 'best_selling_pro
 
 
 
-Route::get('/low_to_price', [ProductController::class, 'low_to_price']); //////////////
+Route::get('/low_to_high_price', [ProductController::class, 'low_to_high_price']); //////////////
+Route::get('/high_to_low_price', [ProductController::class, 'high_to_low_price']); //////////////
 
 

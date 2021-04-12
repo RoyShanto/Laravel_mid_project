@@ -295,11 +295,71 @@ class ProductController extends Controller
         return view('buyer.index', ['users' => $product]);
     }
 
-    public function low_to_price(){ ////////////////////////////////
-        // echo "LTP";
-        $product = Product::max('p_price');
-        echo $product;
+    public function low_to_high_price(){
+        $product = Product::orderBy('p_price', 'asc')->get();
+        return view('buyer.index', ['users' => $product]);
     }
+    public function high_to_low_price(){
+        $product = Product::orderBy('p_price', 'desc')->get();
+        return view('buyer.index', ['users' => $product]);
+    }
+// SELECT * FROM `product` order by p_price
+
+
+
+
+
+
+
+
+    public function best_selling_product(){ ////////////////////////////////
+        // $users = Order::count('p_name');
+        // echo $users;
+
+        // $users = Order::where('p_name', "car")
+        // ->count('p_name');
+        // echo $users;
+        // return view('buyer.index', ['users' => $users]);
+
+        // return Product::find(3)->getbestsellingproduct;
+
+        // $users = Order::groupBy('p_name')
+        // ->get();
+        // $users = Order::groupBy('p_name')->get('p_name');
+        // $users = Order::groupBy('p_name')->get('p_name')->count('p_name');
+        // $users = DB::select(select('p_name')->from('orders')->groupBy('p_name')->havingRaw('count(*) > 0'));
+        // DB::select('
+        // select  ('p_name', 'COUNT(*)''
+        // from orders
+        // group by p_name
+        // having COUNT(*) > 0
+        // order by COUNT(*) desc');
+
+        // echo $users;
+        // foreach($users as $u){
+        //     echo $u->p_id . '<br>';
+        // }
+    // $usersCount = Order::having($users, '>', 0);
+    // echo $usersCount;
+    }
+
+    // select  p_name, COUNT(*)
+    // from orders
+    // group by p_name
+    // having COUNT(*) > 0
+    // order by COUNT(*) desc
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function ask_question($id){  //product id
@@ -364,15 +424,5 @@ class ProductController extends Controller
         return view('Buyer.review_product', ['data' => $data]);
     }
 
-    public function best_selling_product(){
-        // $users = Order::count('p_name');
-        // echo $users;
 
-
-
-        $users = Order::where('p_name', "car")
-        ->count('p_name');
-        echo $users;
-        // return view('buyer.index', ['users' => $users]);
-    }
 }

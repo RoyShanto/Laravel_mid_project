@@ -43,7 +43,7 @@
                     <span style="color: red;">@error('quantity'){{$message}}@enderror</span><br>
 
                     @if($user->status == 'Add_To_Cart')
-                        <input type="hidden" name="p_id" value="{{$user->id}}">
+                        <input type="hidden" name="p_id" value="{{$user->p_id}}">
                         <input type="hidden" name="p_name" value="{{$user->p_name}}">
                         <input type="hidden" name="p_price" value="{{$user->p_price}}">
                         <input type="hidden" name="p_description" value="{{$user->description}}">

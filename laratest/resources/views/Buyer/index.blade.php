@@ -25,7 +25,8 @@
 <span style="color: red;">{{session('msg')}}</span>
 </form>
 
-<a href="/low_to_price">Low To High Price</a>
+<a href="/low_to_high_price">Low To High Price</a><br>
+<a href="/high_to_low_price">High To Low Price</a><br>
 
             @foreach($users as $user)
                 <div style="border:1px solid; width:200px; height:300px; margin-left:10px; margin-right:10px; margin-top:10px; border-radius: 5px; text-align: center; padding:5px; float:left;">

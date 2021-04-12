@@ -12,4 +12,10 @@ class Product extends Model
     protected $table = 'product';
     public $incrementing = false;
     public $timestamps = false;
+
+
+    
+    function getbestsellingproduct(){
+        return $this->hasMany('App\Models\Order');
+    }
 }
