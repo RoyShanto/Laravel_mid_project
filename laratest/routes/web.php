@@ -26,6 +26,9 @@ Route::get('/', function () {
 Route::get('/abc.com', [ProductController::class, 'index'])->middleware('sess');
 Route::get('/show_product/{id}', [ProductController::class, 'show_product']);
 
+
+
+
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'verify']);
 Route::get('/logout', [LogoutController::class, 'index']);
@@ -39,20 +42,15 @@ route::get('/profile/{username}', [UserController::class, 'index']);
 route::get('/edit_profile/{username}', [UserController::class, 'profile']);
 route::post('/edit_profile/{username}', [UserController::class, 'update_info']);
 
-
-
-
-
-
-
-
-
-
 route::get('/premium_membership', [UserController::class, 'premium_membership']);
 route::get('/confirm_premium_membership', [UserController::class, 'confirm_premium_membership']);
 
 route::get('/add_product', [ProductController::class, 'add_product']);
 route::post('/add_product', [ProductController::class, 'added_product']);
+
+
+
+
 
 Route::post('/order_now', [ProductController::class, 'order_now']);
 Route::post('/add_to_cart', [ProductController::class, 'add_to_cart']);

@@ -52,7 +52,7 @@
             </td>
         </tr>
         <tr>
-            <td><input type="submit" name="submit" value="Sign Up"></td>
+            <td><input type="submit" name="submit" value="upload"></td>
             <td></td>
         </tr>
     </table>

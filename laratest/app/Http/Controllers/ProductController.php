@@ -39,7 +39,7 @@ class ProductController extends Controller
             $product_log->image = $file->getClientOriginalName();
             $product_log->save();
 
-            return redirect('/login');
+            return redirect('/add_product');
         }
     }
 
@@ -56,17 +56,18 @@ class ProductController extends Controller
         $this->validate($req, $rules);
 
         if($req->p_status == 'Add_To_Cart'){
-            echo "if";
-            // echo $req->p_id;
-            $data = Order:: find($req->p_id);
+            echo $req->p_id;
+            $data = Order:: find($req->id);
             $data->delete();
-
-
 
             $username = $req->session()->get('username');
 
-            $user = Buyer::where('user_name', $username)
-            ->get();
+            $user = Buyer::where('user_name', $username)->get();
+
+//////////////
+            $forvoucher = DB::table('voucher')->get();
+////////////////
+
 
             foreach($user as $u){
                 $user = new Order();
@@ -76,7 +77,19 @@ class ProductController extends Controller
                 $user->p_name = $req->p_name;
                 $user->p_price = $req->p_price;
                 $user->product_quantity = $req->quantity;
-                $user->total_price = $req->quantity * $req->p_price;
+///////////
+            foreach($forvoucher as $f){
+                if($f->code == $req->voucher){
+                    // echo $f->code;
+                    // echo $f->amount;
+                    $user->total_price = ($req->quantity * $req->p_price) - $f->amount;
+                }
+                else{
+                    $user->total_price = $req->quantity * $req->p_price;
+                }
+            }
+////////////
+                // $user->total_price = $req->quantity * $req->p_price;
                 $user->status = "Orderd";
                 $user->buyer_id = $u['id'];
                 $user->image = $req->p_image;
@@ -108,7 +121,9 @@ class ProductController extends Controller
 
         $user = Buyer::where('user_name', $username)
         ->get();
-
+//////////////
+        $forvoucher = DB::table('voucher')->get();
+////////////////
 
         foreach($user as $u){
             $user = new Order();
@@ -119,7 +134,19 @@ class ProductController extends Controller
             $user->p_name = $req->p_name;
             $user->p_price = $req->p_price;
             $user->product_quantity = $req->quantity;
-            $user->total_price = $req->quantity * $req->p_price;
+///////////
+            foreach($forvoucher as $f){
+                if($f->code == $req->voucher){
+                    // echo $f->code;
+                    // echo $f->amount;
+                    $user->total_price = ($req->quantity * $req->p_price) - $f->amount;
+                }
+                else{
+                    $user->total_price = $req->quantity * $req->p_price;
+                }
+            }
+////////////
+            // $user->total_price = $req->quantity * $req->p_price;
             $user->status = "Orderd";
             $user->buyer_id = $u['id'];
 

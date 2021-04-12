@@ -32,6 +32,7 @@
 
                     Description:
                     {{$user->description}}<br>
+                    Voucher: <input type="text" name="voucher"><br>
 
                     @if($user->status == 'Add_To_Cart')
                         Quantity: <input type="number" name="quantity" value="{{$user->product_quantity}}"><br>
@@ -42,7 +43,12 @@
                     @endif
                     <span style="color: red;">@error('quantity'){{$message}}@enderror</span><br>
 
+
+
+
+
                     @if($user->status == 'Add_To_Cart')
+                        <input type="hidden" name="id" value="{{$user->id}}">
                         <input type="hidden" name="p_id" value="{{$user->p_id}}">
                         <input type="hidden" name="p_name" value="{{$user->p_name}}">
                         <input type="hidden" name="p_price" value="{{$user->p_price}}">

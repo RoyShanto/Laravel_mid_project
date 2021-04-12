@@ -35,6 +35,10 @@
         </tr>
     @endforeach
     </table><br>
+    If you want to cancel you order, please contact us within 2 days.<br><br>
+    Contact Information:<br>
+    phone: 01627167955<br>
+    Time: 8 AM - 10 PM
 
 </body>
 </html>
