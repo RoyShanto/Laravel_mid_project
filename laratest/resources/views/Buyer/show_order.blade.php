@@ -11,7 +11,7 @@
 
 <!-- {{session('username')}} -->
 <a href="/abc.com">Home</a> &nbsp;&nbsp;&nbsp;
-<a href="/profile/{{session('username')}}">Edit Profile</a> &nbsp;&nbsp;&nbsp;
+<a href="/profile/{{session('username')}}">My Profile</a> &nbsp;&nbsp;&nbsp;
 <a href="/show_cart">Add To Cart</a>&nbsp;&nbsp;&nbsp;
 <a href="/show_wish">Wish List</a>&nbsp;&nbsp;&nbsp;
 <a href="/order_history">Order History</a>&nbsp;&nbsp;&nbsp;
@@ -35,10 +35,12 @@
         </tr>
     @endforeach
     </table><br>
+
     If you want to cancel you order, please contact us within 2 days.<br><br>
-    Contact Information:<br>
-    phone: 01627167955<br>
-    Time: 8 AM - 10 PM
+        Contact Information:<br>
+        phone: 01627167955<br>
+        Time: 8 AM - 10 PM
+
 
 </body>
 </html>

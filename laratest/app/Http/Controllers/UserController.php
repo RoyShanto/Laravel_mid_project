@@ -57,9 +57,10 @@ class UserController extends Controller
         $user = DB::table('buyers')->where('user_name', $username)->get();
         // echo $user;
         foreach($user as $u){
-            echo $u->membership;
+            // echo $u->membership;
             if($u->membership == 'Premium'){
-                echo "user already get Premium Membership";
+                $req->session()->flash('msg', 'You already get Premium Membership');
+                return redirect('/abc.com');
             }
             else{
                 return view('Buyer.premium_membership', ['user' => $user]);
@@ -72,7 +73,7 @@ class UserController extends Controller
         $user = DB::table('buyers')
         ->where('user_name', $username)
         ->update([
-            'membership' => "premium"
+            'membership' => "Premium"
             ]);
         $req->session()->flash('msg', 'Premium Membership is done');
         return redirect('/abc.com');

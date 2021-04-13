@@ -61,12 +61,11 @@ class ProductController extends Controller
             $data->delete();
 
             $username = $req->session()->get('username');
-
             $user = Buyer::where('user_name', $username)->get();
 
-//////////////
+
             $forvoucher = DB::table('voucher')->get();
-////////////////
+
 
 
             foreach($user as $u){
@@ -77,26 +76,40 @@ class ProductController extends Controller
                 $user->p_name = $req->p_name;
                 $user->p_price = $req->p_price;
                 $user->product_quantity = $req->quantity;
-///////////
-            foreach($forvoucher as $f){
-                if($f->code == $req->voucher){
-                    // echo $f->code;
-                    // echo $f->amount;
-                    $user->total_price = ($req->quantity * $req->p_price) - $f->amount;
+
+                foreach($forvoucher as $f){
+                    if($f->code == $req->voucher){
+                        if($u['membership'] == 'Premium'){
+                            $user->total_price = ($req->quantity * $req->p_price) - ($f->amount*2);
+                        }
+                        else{
+                            $user->total_price = ($req->quantity * $req->p_price) - $f->amount;
+                        }
+                    }
+
+                    else{
+                        $user->total_price = $req->quantity * $req->p_price;
+                    }
                 }
-                else{
-                    $user->total_price = $req->quantity * $req->p_price;
-                }
-            }
-////////////
-                // $user->total_price = $req->quantity * $req->p_price;
+
                 $user->status = "Orderd";
                 $user->buyer_id = $u['id'];
                 $user->image = $req->p_image;
                 $user->description = $req->p_description;
                 $user->p_id = $req->p_id;
                 $user->save();
+////////////
 
+                $products = DB::table('product')->where('p_name', $req->p_name)->get();
+                foreach($products as $p){
+
+                    $product = DB::table('product')
+                    ->where('p_name', $req->p_name)
+                    ->update([
+                        'sell_quantity' => $p->sell_quantity + $req->quantity
+                        ]);
+                }
+////////////
                 echo "<h1>  Order Successfully Done  </h1>";
                 echo "Name: " . $user->product_name . "<br>";
                 echo "Price: " . $user->product_price . "<br>";
@@ -107,61 +120,61 @@ class ProductController extends Controller
             }
         }
         else{
-            // echo $req->p_name . "<br>";
-        // echo $req->p_price . "<br>";
+            $username = $req->session()->get('username');
+            $user = Buyer::where('user_name', $username)
+            ->get();
 
-        // echo $req->p_quantity . "<br>";
-        // echo $req->quantity . "<br>";
-        // echo $req->quantity * $req->p_price . "<br>";
-        // echo $req->p_image . "<br>";
-        // echo $req->p_description;
+            $forvoucher = DB::table('voucher')->get();
 
 
-        $username = $req->session()->get('username');
+            foreach($user as $u){
+                $user = new Order();
+                $user->buyer_name = $u['full_name'];
+                $user->buyer_username = $u['user_name'];
+                $user->buyer_email = $u['email'];
 
-        $user = Buyer::where('user_name', $username)
-        ->get();
-//////////////
-        $forvoucher = DB::table('voucher')->get();
-////////////////
+                $user->p_name = $req->p_name;
+                $user->p_price = $req->p_price;
+                $user->product_quantity = $req->quantity;
 
-        foreach($user as $u){
-            $user = new Order();
-            $user->buyer_name = $u['full_name'];
-            $user->buyer_username = $u['user_name'];
-            $user->buyer_email = $u['email'];
+                foreach($forvoucher as $f){
+                    if($f->code == $req->voucher){
+                        if($u['membership'] == 'Premium'){
+                            $user->total_price = ($req->quantity * $req->p_price) - ($f->amount*2);
+                        }
+                        else{
+                            $user->total_price = ($req->quantity * $req->p_price) - $f->amount;
+                        }
+                    }
 
-            $user->p_name = $req->p_name;
-            $user->p_price = $req->p_price;
-            $user->product_quantity = $req->quantity;
-///////////
-            foreach($forvoucher as $f){
-                if($f->code == $req->voucher){
-                    // echo $f->code;
-                    // echo $f->amount;
-                    $user->total_price = ($req->quantity * $req->p_price) - $f->amount;
+                    else{
+                        $user->total_price = $req->quantity * $req->p_price;
+                    }
                 }
-                else{
-                    $user->total_price = $req->quantity * $req->p_price;
-                }
-            }
+                $user->status = "Orderd";
+                $user->buyer_id = $u['id'];
+                $user->image = $req->p_image;
+                $user->description = $req->p_description;
+                $user->p_id = $req->p_id;
+                $user->save();
+
 ////////////
-            // $user->total_price = $req->quantity * $req->p_price;
-            $user->status = "Orderd";
-            $user->buyer_id = $u['id'];
+                $products = DB::table('product')->where('p_name', $req->p_name)->get();
+                foreach($products as $p){
 
-
-            $user->image = $req->p_image;
-            $user->description = $req->p_description;
-            $user->p_id = $req->p_id;
-            $user->save();
-
-            echo "<h1>  Order Successfully Done  </h1>";
-            echo "Name: " . $user->product_name . "<br>";
-            echo "Price: " . $user->product_price . "<br>";
-            echo "Quantity: " . $user->product_quantity . "<br>";
-            echo "Total price: " . $user->total_price . "<br>";
-        }
+                    $product = DB::table('product')
+                    ->where('p_name', $req->p_name)
+                    ->update([
+                        'sell_quantity' => $p->sell_quantity + $req->quantity
+                        ]);
+                }
+////////////
+                echo "<h1>  Order Successfully Done  </h1>";
+                echo "Name: " . $user->product_name . "<br>";
+                echo "Price: " . $user->product_price . "<br>";
+                echo "Quantity: " . $user->product_quantity . "<br>";
+                echo "Total price: " . $user->total_price . "<br>";
+            }
 
         }
     }
@@ -221,34 +234,17 @@ class ProductController extends Controller
 
     public function order_from_cart($date, Request $req){
         $username = $req->session()->get('username');
-
-        // $product = Order::where('order_date', $date)
-        // ->where('buyer_username', $username)
-        // ->get();
-
         $product = DB::table('orders')->where('order_date', $date)
         ->where('buyer_username', $username)
         ->get();
-
-        // echo $date;
-        // $product = DB::table('orders')
-        // ->join('buyers', 'orders.buyer_id',"=",'buyers.id')
-        // ->select('orders.*')
-        // // ->where('order_date', $date)
-        // ->where('buyer_username', $username)
-        // ->get();
-
-        // echo $product;
-
         return view('Buyer.select_product', ['users' => $product]);
     }
+
     public function order_history(Request $req){
         $username = $req->session()->get('username');
-
         $product = Order::where('buyer_username', $username)
         ->where('status', "Orderd")
         ->get();
-// print_r($product);
         return view('Buyer.show_order', ['product' => $product]);
     }
 
@@ -296,18 +292,6 @@ class ProductController extends Controller
     }
 
     public function search_product(Request $req){
-        // $product = Product::all();
-        // foreach($product as $p){
-        //     if($p->p_name == $req->search_product){
-        //         // return view('Buyer.index', ['users' => $product]);
-        //         echo "p";
-        //     }
-        //     else{
-        //         echo "f";
-        //     }
-        // }
-
-
         $product = Product::where("p_name", $req->search_product)->get();
         foreach($product as $p){
             if($p->p_name == $req->search_product){
@@ -330,62 +314,11 @@ class ProductController extends Controller
         $product = Product::orderBy('p_price', 'desc')->get();
         return view('buyer.index', ['users' => $product]);
     }
-// SELECT * FROM `product` order by p_price
+    public function best_selling_product(){
 
-
-
-
-
-
-
-
-    public function best_selling_product(){ ////////////////////////////////
-        // $users = Order::count('p_name');
-        // echo $users;
-
-        // $users = Order::where('p_name', "car")
-        // ->count('p_name');
-        // echo $users;
-        // return view('buyer.index', ['users' => $users]);
-
-        // return Product::find(3)->getbestsellingproduct;
-
-        // $users = Order::groupBy('p_name')
-        // ->get();
-        // $users = Order::groupBy('p_name')->get('p_name');
-        // $users = Order::groupBy('p_name')->get('p_name')->count('p_name');
-        // $users = DB::select(select('p_name')->from('orders')->groupBy('p_name')->havingRaw('count(*) > 0'));
-        // DB::select('
-        // select  ('p_name', 'COUNT(*)''
-        // from orders
-        // group by p_name
-        // having COUNT(*) > 0
-        // order by COUNT(*) desc');
-
-        // echo $users;
-        // foreach($users as $u){
-        //     echo $u->p_id . '<br>';
-        // }
-    // $usersCount = Order::having($users, '>', 0);
-    // echo $usersCount;
+        $product = Product::orderBy('sell_quantity', 'desc')->get();
+        return view('buyer.index', ['users' => $product]);
     }
-
-    // select  p_name, COUNT(*)
-    // from orders
-    // group by p_name
-    // having COUNT(*) > 0
-    // order by COUNT(*) desc
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -437,7 +370,7 @@ class ProductController extends Controller
     }
 
     public function review_submit(Request $req){
-        $user = new Feedback();          //Buyer is a model name
+        $user = new Feedback();
         $user->product_id = $req->id;
         $user->review = $req->review;
         $user->save();

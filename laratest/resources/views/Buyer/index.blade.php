@@ -15,7 +15,6 @@
 <a href="/show_cart">Add To Cart</a>&nbsp;&nbsp;&nbsp;
 <a href="/show_wish">Wish List</a>&nbsp;&nbsp;&nbsp;
 <a href="/order_history">Order History</a>&nbsp;&nbsp;&nbsp;
-<a href="/best_selling_product">Best Selling Product</a>&nbsp;&nbsp;&nbsp;
 <a href="/logout">Logout</a>
 <br><br>
 <form action="", method="POST">
@@ -25,6 +24,7 @@
 <span style="color: red;">{{session('msg')}}</span>
 </form>
 
+<a href="/best_selling_product">Best Selling Product</a><br>
 <a href="/low_to_high_price">Low To High Price</a><br>
 <a href="/high_to_low_price">High To Low Price</a><br>
 

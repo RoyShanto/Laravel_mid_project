@@ -8,6 +8,12 @@
 </head>
 <body>
     <h1>Review Product</h1>
+    <a href="/abc.com">Home</a> &nbsp;&nbsp;&nbsp;
+    <a href="/profile/{{session('username')}}">My Profile</a> &nbsp;&nbsp;&nbsp;
+    <a href="/show_cart">Add To Cart</a>&nbsp;&nbsp;&nbsp;
+    <a href="/show_wish">Wish List</a>&nbsp;&nbsp;&nbsp;
+    <a href="/order_history">Order History</a>&nbsp;&nbsp;&nbsp;
+    <a href="/logout">Logout</a><br><br>
     <table border="1">
         <tr>
             <th>Review</th>
@@ -25,7 +31,7 @@
     <textarea name="review" cols="50" rows="3"></textarea><br>
     <input type="submit" value="Submit">
 
-    <input type="hidden" name="id" value="{{$d->product_id}}">
+
     </form>
 
 </body>
