@@ -15,26 +15,18 @@
     <legend>New Registration</legend>
     <table>
 
-    <tr>
-        <td>Product Name:</td>
-        <td>
-            <input type="text" name="pname"><br>
-            <span style="color: red;">@error('pname'){{$message}}@enderror</span>
-        </td>
-    </tr>
-    <tr>
-        <td>Product Price:</td>
-        <td>
-            <input type="text" name="pprice"><br>
-            <span style="color: red;">@error('pprice'){{$message}}@enderror</span>
-        </td>
-    </tr>
-
         <tr>
-            <td>Product Quantity:</td>
+            <td>Product Name:</td>
             <td>
-                <input type="text" name="pquantity"><br>
-                <span style="color: red;">@error('pquantity'){{$message}}@enderror</span>
+                <input type="text" name="pname"><br>
+                <span style="color: red;">@error('pname'){{$message}}@enderror</span>
+            </td>
+        </tr>
+        <tr>
+            <td>Product Price:</td>
+            <td>
+                <input type="text" name="pprice"><br>
+                <span style="color: red;">@error('pprice'){{$message}}@enderror</span>
             </td>
         </tr>
         <tr>

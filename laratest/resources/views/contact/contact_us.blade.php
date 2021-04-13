@@ -48,10 +48,8 @@ a{
     <title>Document</title>
 </head>
 <body>
-<h1>Order History</h1>
-
-<!-- {{session('username')}} -->
-<a href="/abc.com">Home</a> &nbsp;&nbsp;&nbsp;
+        <h1>Contact Information</h1>
+        <a href="/abc.com">Home</a> &nbsp;&nbsp;&nbsp;
 <a href="/profile/{{session('username')}}">My Profile</a> &nbsp;&nbsp;&nbsp;
 <a href="/show_cart">Add To Cart</a>&nbsp;&nbsp;&nbsp;
 <a href="/show_wish">Wish List</a>&nbsp;&nbsp;&nbsp;
@@ -69,28 +67,19 @@ a{
 </div>
 <!-- /////////////////// -->
 <a href="/logout">Logout</a>
-<br><br>
+        <table>
+            <tr>
+                <th>Email: </th><td>roycse@gmail.com</td>
+            </tr>
+            <tr>
+                <th>Phone: </th><td>01627167955</td>
+            </tr>
+            <tr>
+                <th>Time: </th><td>8 AM - 10 PM</td>
+            </tr>
 
-
-    <table border="1">
-        <tr>
-            <td>Product Name</td>
-            <td>Price</td>
-            <td>Quantity</td>
-            <td>Total Price</td>
-        </tr>
-    @foreach($product as $user)
-        <tr>
-            <td>{{$user['p_name']}}</td>
-            <td>{{$user['p_price']}}</td>
-            <td>{{$user['product_quantity']}}</td>
-            <td>{{$user['total_price']}}</td>
-        </tr>
-    @endforeach
-    </table><br>
-
-    <h2>If you want to cancel you order, please contact us within 2 days.</h2>
-<!-- /////////////////////////////// -->
+        </table>
+        <!-- /////////////////////////////// -->
 <script>
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");

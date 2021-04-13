@@ -110,13 +110,13 @@ class ProductController extends Controller
                         ]);
                 }
 ////////////
-                echo "<h1>  Order Successfully Done  </h1>";
-                echo "Name: " . $user->product_name . "<br>";
-                echo "Price: " . $user->product_price . "<br>";
-                echo "Quantity: " . $user->product_quantity . "<br>";
-                echo "Total price: " . $user->total_price . "<br>";
-
-                return redirect('/show_cart');
+                // echo "<h1>  Order Successfully Done  </h1>";
+                // echo "Name: " . $user->product_name . "<br>";
+                // echo "Price: " . $user->product_price . "<br>";
+                // echo "Quantity: " . $user->product_quantity . "<br>";
+                // echo "Total price: " . $user->total_price . "<br>";
+                $req->session()->flash('msg', 'Order Successful');
+                return redirect('/abc.com');
             }
         }
         else{
@@ -169,11 +169,13 @@ class ProductController extends Controller
                         ]);
                 }
 ////////////
-                echo "<h1>  Order Successfully Done  </h1>";
-                echo "Name: " . $user->product_name . "<br>";
-                echo "Price: " . $user->product_price . "<br>";
-                echo "Quantity: " . $user->product_quantity . "<br>";
-                echo "Total price: " . $user->total_price . "<br>";
+                // echo "<h1>  Order Successfully Done  </h1>";
+                // echo "Name: " . $user->product_name . "<br>";
+                // echo "Price: " . $user->product_price . "<br>";
+                // echo "Quantity: " . $user->product_quantity . "<br>";
+                // echo "Total price: " . $user->total_price . "<br>";
+                $req->session()->flash('msg', 'Order Successful');
+                return redirect('/abc.com');
             }
 
         }
@@ -208,11 +210,13 @@ class ProductController extends Controller
             $user->p_id = $req->p_id;
             $user->save();
 
-            echo "<h1>  Add_To_Cart Successfully Done  </h1>";
-            echo "Name: " . $user->p_name . "<br>";
-            echo "Price: " . $user->p_price . "<br>";
-            echo "Quantity: " . $user->product_quantity . "<br>";
-            echo "Total price: " . $user->total_price . "<br>";
+            // echo "<h1>  Add_To_Cart Successfully Done  </h1>";
+            // echo "Name: " . $user->p_name . "<br>";
+            // echo "Price: " . $user->p_price . "<br>";
+            // echo "Quantity: " . $user->product_quantity . "<br>";
+            // echo "Total price: " . $user->total_price . "<br>";
+            $req->session()->flash('msg', 'Product Add In Add To Cart');
+            return redirect('/abc.com');
         }
     }
 
@@ -332,7 +336,7 @@ class ProductController extends Controller
 
     }
     public function ask_question_submit(Request $req){
-        $user = new Feedback();          //Buyer is a model name
+        $user = new Feedback();
         $user->product_id = $req->id;
         $user->ask_question = $req->question;
         $user->save();
@@ -383,6 +387,4 @@ class ProductController extends Controller
 
         return view('Buyer.review_product', ['data' => $data]);
     }
-
-
 }

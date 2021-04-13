@@ -99,4 +99,8 @@ class UserController extends Controller
         $req->session()->flash('msg', 'Report send succesfull');
         return redirect('/abc.com');
     }
+
+    public function contact_us(){
+        return view('contact.contact_us');
+    }
 }

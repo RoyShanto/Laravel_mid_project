@@ -37,6 +37,7 @@ Route::get('/logout', [LogoutController::class, 'index']);
 route::get('/registration', [RegistrationController::class, 'index']);
 route::post('/registration', [RegistrationController::class, 'store_user']);
 
+route::get('/contact_us', [UserController::class, 'contact_us']);
 route::get('/profile/{username}', [UserController::class, 'index']);
 
 route::get('/edit_profile/{username}', [UserController::class, 'profile']);
